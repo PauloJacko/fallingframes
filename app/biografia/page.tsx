@@ -107,7 +107,7 @@ export default function BiografiaPage() {
           <p className="mt-6 max-w-3xl text-lg tracking-wide text-zinc-300 md:text-xl md:leading-relaxed">
             Originarios de La Serena, Chile, <strong className="text-white font-bold">Falling Frames</strong> es una banda de rock progresivo experimental 
             que fractura los límites de la estructura musical popular. Descartando los coros y pasajes repetitivos, 
-            la banda compone piezas en actos: relatos que transitan desde la euforia a la tragedy.
+            la banda compone piezas en actos: relatos que transitan desde la euforia a la tragedia.
           </p>
         </header>
 
