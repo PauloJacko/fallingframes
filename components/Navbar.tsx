@@ -19,31 +19,31 @@ export default function Navbar() {
       {/* CONTENEDOR PRINCIPAL: justify-between asegura la separación Left-Center-Right */}
       <div className="mx-auto flex h-20 w-full max-w-7xl items-center justify-between px-6">
         
-        {/* IZQUIERDA - LOGO */}
-        <div className="flex w-48 shrink-0 items-center justify-start sm:w-56">
-          <a href="#" onClick={closeMenus}>
-            <Image
-              src="/images/logo-horizontal.png"
-              alt="Falling Frames"
-              width={180}
-              height={60}
-              priority
-              className="h-auto w-full object-contain"
-            />
-          </a>
-        </div>
+      {/* IZQUIERDA - LOGO */}
+      <div className="flex w-48 shrink-0 items-center justify-start sm:w-56">
+        <a href="/" onClick={closeMenus}>
+          <Image
+            src="/images/logo-horizontale.png"
+            alt="Falling Frames"
+            width={180}
+            height={60}
+            priority
+            className="h-auto w-full object-contain"
+          />
+        </a>
+      </div>
 
         {/* CENTRO - MENÚ ESCRITORIO */}
         <nav className="hidden flex-1 items-center justify-center gap-10 lg:flex xl:gap-14">
           <a
-            href="#videos"
+            href="/musica"
             className="text-xs uppercase tracking-[0.25em] text-zinc-300 transition hover:text-emerald-400 xl:text-sm"
           >
             Música & Videos
           </a>
 
           <a
-            href="#bio"
+            href="/biografia"
             className="text-xs uppercase tracking-[0.25em] text-zinc-300 transition hover:text-emerald-400 xl:text-sm"
           >
             Biografía
@@ -115,7 +115,7 @@ export default function Navbar() {
             </a>
 
             <a
-              href="#bio"
+              href="/biografia"
               className="text-sm uppercase tracking-[0.25em] text-zinc-300 transition hover:text-emerald-400"
               onClick={closeMenus}
             >
