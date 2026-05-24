@@ -2,7 +2,7 @@ import Image from "next/image";
 
 const team = [
   {
-    name: "Just Roadie",
+    name: "Rod",
     role: "Primera Guitarra // Segundas Voces",
     desc: "Devoción total al instrumento. Aporta la velocidad, precisión técnica y rítmicas complejas indispensables para la arquitectura musical de la banda.",
     img: "/images/integrantes/roadie.jpg"
@@ -16,25 +16,24 @@ const team = [
   {
     name: "DisasterPiece",
     role: "Bajo // Guturales",
-    desc: "El motor de la distorsión. Encargado de romper los paradigmas del rock con líneas de bajo dinámicas, combinadas con la agresividad de las voces guturales.",
+    desc: "Encargado de dar dinamismo a las frecuencias graves de las composiciones, combinando líneas dinámicas con la agresividad de sus voces guturales.",
     img: "/images/integrantes/disaster.jpg"
   },
   {
     name: "Yuni D. Or",
     role: "Batería // Segundas Voces",
-    desc: "Energía inagotable. Diseña bases sólidas y polirrítmicas que dotan a la banda de una versatilidad lúdica y un aura escénica demoledora.",
-    img: "/images/integrantes/yuni.jpg"
+    desc: "El cerebro detrás de la métrica. Diseña bases sólidas y polirrítmicas que dotan a la banda de tiempos impredecibles y ritmos alucinantes",
+    img: "/images/integrantes/yunis.jpg"
   },
   {
     name: "Paulokko",
-    role: "Teclados // Sintetizadores // Segundas Voces",
-    desc: "El arquitecto atmosférico. Incorporado para expandir el espectro sonoro mediante texturas cinematográficas, ambientes envolventes y solos épicos.",
-    img: "/images/integrantes/paulokko.jpg"
+    role: "Pianos // Sintetizadores // Segundas Voces",
+    desc: "El arquitecto de atmósferas. Es el responsible de expandir el espectro sonoro mediante texturas cinematográficas, ambientes envolventes y solos épicos.",
+    img: "/images/integrantes/paulokkos.jpg"
   }
 ];
 
 export default function BiografiaPage() {
-  // Definimos los estilos en una constante limpia para inyectarlos de forma segura en el servidor
   const cssIndustrial = `
     .wrapper-industrial {
       background-color: #050505 !important;
@@ -91,7 +90,6 @@ export default function BiografiaPage() {
   return (
     <section className="min-h-screen bg-black pt-32 pb-24 text-zinc-400 font-sans relative overflow-hidden wrapper-industrial">
       
-      {/* Inyección nativa compatible 100% con Server Components */}
       <style dangerouslySetInnerHTML={{ __html: cssIndustrial }} />
 
       <div className="mx-auto max-w-6xl px-6 relative z-10">
@@ -106,7 +104,7 @@ export default function BiografiaPage() {
           </h1>
           <p className="mt-6 max-w-3xl text-lg tracking-wide text-zinc-300 md:text-xl md:leading-relaxed">
             Originarios de La Serena, Chile, <strong className="text-white font-bold">Falling Frames</strong> es una banda de rock progresivo experimental 
-            que fractura los límites de la estructura musical popular. Descartando los coros y pasajes repetitivos, 
+            que rompen los límites de la musical popular. Entrelazando pasajes de profunda emotividad con un virtuosismo brutal y oscuro, 
             la banda compone piezas en actos: relatos que transitan desde la euforia a la tragedia.
           </p>
         </header>
@@ -131,13 +129,16 @@ export default function BiografiaPage() {
             </h2>
             <div className="space-y-6 text-xs md:text-sm uppercase tracking-wider text-zinc-400 leading-relaxed font-sans">
               <p>
-                El proyecto comenzó como un espacio de experimentación pura entre Disasterpiece, Milo Chan y Just Roadie. 
-                La química inmediata exigió seriedad, consolidando la columna vertebral de la banda con la posterior incorporación de Yuni D. Or en la batería.
+                El proyecto comenzó como un espacio de experimentación entre Disasterpiece, Milo Chan y Rode. 
+                Pronto el proyecto se volvió algo serio, consolidando la columna vertebral de la banda con la posterior incorporación de Yuni D. Or en la batería.
+                El año 2025 marcó un point de inflexión con la llegada de Paulokko, quien expandió el espectro sonoro con sus teclados, aportando una dimensión cinematográfica a la música.
               </p>
               <p>
-                Su sonido es un colisionador de partículas donde coexisten la virtuosidad matemática de <span className="text-white font-semibold">Polyphia</span>, 
-                los quiebres psicóticos de <span className="text-white font-semibold">Maximum the Hormone</span>, el galope clásico de <span className="text-white font-semibold">Iron Maiden</span> 
-                 y la monumental arquitectura de <span className="text-white font-semibold">Dream Theater</span>.
+                Su sonido es una amalgama impredecible donde coexisten la 
+                <span className="text-white font-semibold"> precisión matemática del math rock</span>, 
+                los <span className="text-white font-semibold">quiebres erráticos del metal moderno</span>, el 
+                <span className="text-white font-semibold"> galope épico del heavy metal clásico</span> y la 
+                <span className="text-white font-semibold"> arquitectura del rock progresivo</span>.
               </p>
             </div>
           </div>
@@ -163,7 +164,7 @@ export default function BiografiaPage() {
                 <div className="absolute -left-[31px] top-1 w-2 h-2 rounded-full bg-white shadow-[0_0_8px_#fff]" />
                 <span className="text-white font-bold block mb-1">[ ACTUALIDAD ] — GRITO SUBTERRÁNEO</span>
                 <p className="text-zinc-400 uppercase tracking-wide leading-relaxed">
-                  Consolidación de su disco debut. Un rompecabezas emocional con la participación lúdica de Popin.
+                  Consolidación de su disco debut. Disco conceptual en VI actos que llevan desde la euforia a la tragedia.
                 </p>
               </div>
             </div>
@@ -178,7 +179,7 @@ export default function BiografiaPage() {
         </div>
 
         {/* Grid de Integrantes */}
-        <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3 mb-32">
           {team.map((member, i) => (
             <div 
               key={i} 
@@ -212,6 +213,50 @@ export default function BiografiaPage() {
               </div>
             </div>
           ))}
+        </div>
+
+        {/* ================= ACTO 4: PRODUCCIÓN AUDIOVISUAL ================= */}
+        <div className="border-t border-zinc-900 pt-16">
+          <div className="flex flex-col items-center justify-between gap-12 rounded-3xl border-2 border-zinc-800 bg-zinc-950 p-8 md:p-12 lg:flex-row lg:gap-20">
+            
+            <div className="max-w-2xl text-center lg:text-left">
+              <p className="text-xs font-semibold uppercase tracking-[0.5em] text-emerald-400 mb-3" style={{ textShadow: "0 0 8px rgba(16,185,129,0.3)" }}>
+                // TRAS LAS CÁMARAS
+              </p>
+              <h2 className="text-3xl font-black uppercase tracking-wider text-white sm:text-4xl">
+                Nostromo Producciones
+              </h2>
+              <p className="mt-4 text-sm leading-relaxed tracking-wide text-zinc-400">
+                La narrativa visual y la atmósfera oscura que define los videoclips de la banda cobran vida bajo la dirección técnica y creativa de Nostromo. Un pilar fundamental para plasmar la densidad dramática de nuestras canciones en piezas cinematográficas memorables.
+              </p>
+              <div className="mt-6">
+                <a 
+                  href="https://instagram.com/nostromo.cl" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 rounded-full border border-zinc-800 bg-black px-5 py-2.5 font-mono text-xs uppercase tracking-widest text-zinc-400 transition-all duration-300 hover:border-emerald-500/40 hover:text-emerald-400 hover:shadow-[0_0_15px_rgba(16,185,129,0.1)]"
+                >
+                  <span>Síguelos en Instagram</span>
+                  <span className="text-emerald-400 font-bold">@nostromo.cl</span>
+                </a>
+              </div>
+            </div>
+
+            {/* Contenedor tipo badge/placa metálica sólida para el logo original */}
+            <div className="relative flex h-48 w-48 shrink-0 items-center justify-center overflow-hidden rounded-2xl border-2 border-zinc-800 bg-black p-2 shadow-2xl group">
+              {/* Sutil halo esmeralda que reacciona al hover para dar volumen dinámico */}
+              <div className="absolute inset-0 -z-10 rounded-2xl bg-emerald-500/5 opacity-0 blur-xl transition-opacity duration-500 group-hover:opacity-100" />
+              
+              <Image
+                src="/images/nostromo.png"
+                alt="Logo Nostromo Producciones"
+                width={170}
+                height={170}
+                className="h-full w-full object-contain transition duration-500 group-hover:scale-[1.03]"
+              />
+            </div>
+
+          </div>
         </div>
 
       </div>
