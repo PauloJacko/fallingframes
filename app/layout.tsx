@@ -30,7 +30,7 @@ export const metadata: Metadata = {
 
   openGraph: {
     title: "Falling Frames // Experimental Progressive Metal",
-    description: "Explora el cancionero interactivo, líricas oficiales y nuestra tienda de merch. Adéntrate en la experiencia industrial de Falling Frames.",
+    description: "Explora el cancionero interactivo, líricas oficiales y nuestra tienda de merch. Adéntrate en la experiencia Falling Frames.",
     url: "https://fallingframes.cl",
     siteName: "Falling Frames",
     locale: "es_CL",
