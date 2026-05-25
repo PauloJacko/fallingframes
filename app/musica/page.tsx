@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 
 // 1. DATA ESTRUCTURADA POR LANZAMIENTOS (DISCOS / SINGLES)
 type Track = {
@@ -122,10 +123,18 @@ export default function MusicaVideosPage() {
   const currentTracks = discography[selectedRelease].tracks;
   const [activeTrack, setActiveTrack] = useState(currentTracks[0]);
   const [activeVideoTab, setActiveVideoTab] = useState("oficial");
+  
+  // Estado para controlar qué video se está reproduciendo activamente por su índice/url
+  const [playingVideoUrl, setPlayingVideoUrl] = useState<string | null>(null);
 
   const handleReleaseChange = (releaseKey: keyof typeof discography) => {
     setSelectedRelease(releaseKey);
     setActiveTrack(discography[releaseKey].tracks[0]);
+  };
+
+  const handleTabChange = (tabId: string) => {
+    setActiveVideoTab(tabId);
+    setPlayingVideoUrl(null); // Resetear videos en reproducción al cambiar de pestaña
   };
 
   const officialVideos = Object.values(discography)
@@ -141,12 +150,17 @@ export default function MusicaVideosPage() {
   const allVideos = [...officialVideos, ...extraVideos];
   const filteredVideos = allVideos.filter(video => video.type === activeVideoTab);
 
+  // Función ayudante para extraer el ID de video de YouTube desde la URL de embed
+  const getYouTubeId = (url: string) => {
+    const parts = url.split("/embed/");
+    return parts.length > 1 ? parts[1].split("?")[0] : "";
+  };
+
   return (
     <section className="min-h-screen bg-black pt-32 pb-24 text-zinc-400 font-sans relative overflow-hidden wrapper-industrial">
       
-      {/* INYECCIÓN DE CSS NATIVO PARA LA REJA Y EL GLOW INDUSTRIAL */}
+      {/* INYECCIÓN DE CSS NATIVO */}
       <style jsx global>{`
-        /* 1. La Reja Metálica de Fondo Extrema */
         .wrapper-industrial {
           background-color: #050505 !important;
           background-image: 
@@ -154,8 +168,6 @@ export default function MusicaVideosPage() {
             linear-gradient(90deg, rgba(16, 185, 129, 0.04) 1.5px, transparent 1.5px) !important;
           background-size: 30px 30px !important;
         }
-
-        /* 2. El Destello Verde Atmosférico Detrás del Contenido */
         .wrapper-industrial::before {
           content: "";
           position: absolute;
@@ -168,29 +180,22 @@ export default function MusicaVideosPage() {
           pointer-events: none;
           z-index: 0;
         }
-
-        /* 3. El Efecto Neón Extremo (Glow) para los Elementos Activos */
         .glow-active {
           background: rgba(16, 185, 129, 0.12) !important;
           border-color: rgba(16, 185, 129, 0.6) !important;
           color: #ffffff !important;
           box-shadow: 0 0 20px rgba(16, 185, 129, 0.25), inset 0 0 10px rgba(16, 185, 129, 0.1) !important;
         }
-
-        /* Glow para categorías de video */
         .glow-tab-active {
           background-color: #10b981 !important;
           color: #000000 !important;
           box-shadow: 0 0 25px rgba(16, 185, 129, 0.5) !important;
         }
-
-        /* 4. Bordes de Paneles Sólidos de Metal Oscuro */
         .panel-metalico {
           background-color: rgba(10, 10, 10, 0.95) !important;
           border: 2px solid #27272a !important;
           box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.9) !important;
         }
-
         .subpanel-metalico {
           background-color: #020202 !important;
           border: 1px solid #1f1f23 !important;
@@ -231,7 +236,7 @@ export default function MusicaVideosPage() {
             ))}
           </div>
           
-          {/* CONTENEDOR PRINCIPAL: PANEL SÓLIDO */}
+          {/* CONTENEDOR PRINCIPAL */}
           <div className="grid grid-cols-1 gap-12 lg:grid-cols-12 rounded-3xl p-6 md:p-10 panel-metalico">
             
             {/* Lista de Canciones */}
@@ -259,7 +264,7 @@ export default function MusicaVideosPage() {
               ))}
             </div>
 
-            {/* Letra Dinámica y Reproductor: SUBPANEL SÓLIDO */}
+            {/* Letra Dinámica y Reproductor */}
             <div className="lg:col-span-7 flex flex-col justify-between rounded-2xl p-6 md:p-8 min-h-[500px] subpanel-metalico">
               
               <div className="overflow-y-auto max-h-[380px] pr-4 custom-scrollbar mb-6">
@@ -296,7 +301,7 @@ export default function MusicaVideosPage() {
           </div>
         </div>
 
-        {/* ================= SECCIÓN 2: ARCHIVO DE VIDEOS FILTRADOS ================= */}
+        {/* ================= SECCIÓN 2: ARCHIVO DE VIDEOS OPTIMIZADO ================= */}
         <div>
           <div className="flex flex-col items-start justify-between gap-6 mb-12 md:flex-row md:items-end">
             <div>
@@ -314,7 +319,7 @@ export default function MusicaVideosPage() {
               ].map((tab) => (
                 <button
                   key={tab.id}
-                  onClick={() => setActiveVideoTab(tab.id)}
+                  onClick={() => handleTabChange(tab.id)}
                   className={`px-4 py-2 text-[10px] font-bold uppercase tracking-widest rounded-lg transition-all ${
                     activeVideoTab === tab.id
                       ? "glow-tab-active font-black"
@@ -329,33 +334,67 @@ export default function MusicaVideosPage() {
 
           {filteredVideos.length > 0 ? (
             <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
-              {filteredVideos.map((video, index) => (
-                <div 
-                  key={index} 
-                  className="group flex flex-col justify-between overflow-hidden rounded-2xl border border-zinc-900 bg-zinc-950 p-4 transition-all duration-300 hover:border-zinc-700"
-                >
-                  <div className="aspect-video w-full rounded-xl bg-black border border-zinc-900 overflow-hidden">
-                    <iframe
-                      width="100%"
-                      height="100%"
-                      src={video.embedUrl}
-                      title={video.title}
-                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                      allowFullScreen
-                      className="border-0 opacity-75 group-hover:opacity-100 transition-opacity duration-300"
-                    ></iframe>
-                  </div>
+              {filteredVideos.map((video, index) => {
+                const youtubeId = getYouTubeId(video.embedUrl);
+                const isPlaying = playingVideoUrl === video.embedUrl;
 
-                  <div className="mt-4 px-1">
-                    <h4 className="text-xs font-bold uppercase tracking-wider text-zinc-400 group-hover:text-emerald-400 transition-colors duration-300 leading-snug">
-                      {video.title}
-                    </h4>
-                    <p className="text-[10px] font-mono text-zinc-600 uppercase mt-1">
-                      {video.info}
-                    </p>
+                return (
+                  <div 
+                    key={index} 
+                    className="group flex flex-col justify-between overflow-hidden rounded-2xl border border-zinc-900 bg-zinc-950 p-4 transition-all duration-300 hover:border-zinc-700"
+                  >
+                    <div className="aspect-video w-full rounded-xl bg-black border border-zinc-900 overflow-hidden relative">
+                      
+                      {isPlaying ? (
+                        /* El iframe real de YouTube solo se renderiza si el usuario presionó la tarjeta */
+                        <iframe
+                          width="100%"
+                          height="100%"
+                          src={`${video.embedUrl}?autoplay=1`} // Se añade autoplay automático al activarse
+                          title={video.title}
+                          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                          allowFullScreen
+                          className="border-0 w-full h-full"
+                        ></iframe>
+                      ) : (
+                        /* Fachada Inteligente: Carga instantánea usando las miniaturas nativas de YouTube */
+                        <button
+                          onClick={() => setPlayingVideoUrl(video.embedUrl)}
+                          className="absolute inset-0 w-full h-full group/btn focus:outline-none"
+                          aria-label={`Reproducir ${video.title}`}
+                        >
+                          <Image
+                            src={`https://img.youtube.com/vi/${youtubeId}/mqdefault.jpg`}
+                            alt={video.title}
+                            fill
+                            sizes="(max-w-768px) 100vw, 33vw"
+                            className="object-cover opacity-50 group-hover/btn:opacity-80 transition-opacity duration-300"
+                          />
+                          
+                          {/* Icono Industrial Personalizado de Play (Glow Esmeralda) */}
+                          <div className="absolute inset-0 flex items-center justify-center">
+                            <div className="h-12 w-12 rounded-full bg-black/80 border border-zinc-800 flex items-center justify-center text-emerald-400 group-hover/btn:text-white group-hover/btn:border-emerald-500 group-hover/btn:scale-110 group-hover/btn:shadow-[0_0_20px_rgba(16,185,129,0.4)] transition-all duration-300">
+                              <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" className="w-5 h-5 ml-0.5">
+                                <path d="M8 5v14l11-7z" />
+                              </svg>
+                            </div>
+                          </div>
+                        </button>
+                      )}
+
+                    </div>
+
+                    <div className="mt-4 px-1">
+                      <h4 className="text-xs font-bold uppercase tracking-wider text-zinc-400 group-hover:text-emerald-400 transition-colors duration-300 leading-snug">
+                        {video.title}
+                      </h4>
+                      <p className="text-[10px] font-mono text-zinc-600 uppercase mt-1">
+                        {video.info}
+                      </p>
+                    </div>
                   </div>
-                </div>
-              ))}
+                );
+              })}
             </div>
           ) : (
             <div className="text-center py-16 border border-dashed border-zinc-800 rounded-3xl bg-zinc-950">

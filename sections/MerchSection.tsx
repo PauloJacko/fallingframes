@@ -73,22 +73,23 @@ export default function MerchSection() {
           </>
         ) : (
           /* ================= MODO DE ESPERA: PRÓXIMAMENTE ================= */
-          <div className="flex flex-col items-center justify-center rounded-3xl border border-zinc-900 bg-zinc-950/30 py-24 px-6 text-center backdrop-blur-sm relative overflow-hidden group">
+          <div className="flex flex-col items-center justify-center rounded-3xl border border-zinc-900 bg-zinc-950/30 py-24 px-4 text-center backdrop-blur-sm relative overflow-hidden group">
             {/* Detalle estético de rejilla industrial de fondo */}
             <div className="absolute inset-0 opacity-[0.02] bg-[radial-gradient(#10b981_1px,transparent_1px)] bg-[size:24px_24px]" />
             
-            <p className="text-xs font-semibold uppercase tracking-[0.6em] text-zinc-600 mb-4">// INDUMENTARIA & AUDIO</p>
+            <p className="text-[10px] font-semibold uppercase tracking-[0.3em] text-zinc-600 mb-4 sm:text-xs sm:tracking-[0.6em]">
+              // INDUMENTARIA & AUDIO
+            </p>
             
-            <h2 className="text-4xl font-black uppercase tracking-[0.2em] text-zinc-400 md:text-5xl transition-colors duration-500 group-hover:text-white">
+            <h2 className="text-3xl font-black uppercase tracking-[0.08em] text-zinc-400 sm:text-4xl md:text-5xl md:tracking-[0.2em] transition-colors duration-500 group-hover:text-white break-words">
               Próximamente
             </h2>
             
-            {/* Año destacado con sutil brillo verde esmeralda */}
-            <div className="mt-4 rounded-full border border-emerald-500/20 bg-emerald-500/5 px-6 py-2 text-lg font-mono font-bold tracking-[0.4em] text-emerald-400 shadow-[0_0_15px_rgba(16,185,129,0.05)]">
+            <div className="mt-4 rounded-full border border-emerald-500/20 bg-emerald-500/5 px-6 py-2 text-base font-mono font-bold tracking-[0.2em] sm:text-lg sm:tracking-[0.4em] text-emerald-400 shadow-[0_0_15px_rgba(16,185,129,0.05)]">
               2027
             </div>
 
-            <p className="mt-6 max-w-md text-xs uppercase tracking-widest text-zinc-500 leading-relaxed">
+            <p className="mt-6 max-w-md text-[10px] uppercase tracking-widest text-zinc-500 leading-relaxed sm:text-xs">
               La vestimenta, ediciones físicas y miscelaneos de Falling Frames están en proceso de manufactura.
             </p>
           </div>

@@ -78,9 +78,13 @@ export default function BiografiaPage() {
       background-color: rgba(8, 8, 8, 0.9) !important;
       border: 1px solid #1f1f23 !important;
       transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+      cursor: pointer;
+      outline: none; /* Elimina el recuadro azul por defecto de accesibilidad */
     }
 
-    .tarjeta-musico:hover {
+    /* CORRECCIÓN EN CSS: Combinamos hover y focus-within para que la tarjeta reaccione igual en PC y Celular */
+    .tarjeta-musico:hover,
+    .tarjeta-musico:focus-within {
       border-color: rgba(16, 185, 129, 0.5) !important;
       box-shadow: 0 0 25px rgba(16, 185, 129, 0.15) !important;
       transform: translateY(-4px);
@@ -179,11 +183,12 @@ export default function BiografiaPage() {
         </div>
 
         {/* Grid de Integrantes */}
-        <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3 mb-32">
+        <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3 mb-10">
           {team.map((member, i) => (
             <div 
               key={i} 
-              className="group flex flex-col justify-between overflow-hidden rounded-2xl p-4 tarjeta-musico"
+              tabIndex={0} /* CORRECCIÓN: Permite que la tarjeta sea enfocable al hacer tap en celular */
+              className="group flex flex-col justify-between overflow-hidden rounded-2xl p-4 tarjeta-musico select-none"
             >
               {/* Foto Vertical */}
               <div className="relative aspect-[3/4] w-full overflow-hidden rounded-xl bg-black border border-zinc-900">
@@ -192,15 +197,17 @@ export default function BiografiaPage() {
                   alt={member.name}
                   fill
                   sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                  className="object-cover grayscale transition duration-500 ease-out group-hover:scale-105 group-hover:grayscale-0"
+                  /* CORRECCIÓN AQUÍ: Cambiamos active por focus:grayscale-0 (usando la tarjeta como disparador de grupo) */
+                  className="object-cover grayscale group-hover:grayscale-0 group-focus-within:grayscale-0 transition duration-500 ease-out group-hover:scale-105 group-focus-within:scale-105"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-80 group-hover:opacity-40 transition-opacity duration-500" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-80 group-hover:opacity-40 group-focus-within:opacity-40 transition-opacity duration-500" />
               </div>
 
               {/* Textos del integrante */}
               <div className="mt-6 px-1 flex-grow flex flex-col justify-between">
                 <div>
-                  <h3 className="text-lg font-bold uppercase tracking-wider text-white transition-all duration-300 group-hover:text-emerald-400">
+                  {/* CORRECCIÓN AQUÍ: group-focus-within tiñe las letras de verde esmeralda uniformemente */}
+                  <h3 className="text-lg font-bold uppercase tracking-wider text-white transition-all duration-300 group-hover:text-emerald-400 group-focus-within:text-emerald-400">
                     {member.name}
                   </h3>
                   <p className="text-[10px] font-mono tracking-widest text-zinc-500 mt-1 uppercase">
@@ -215,17 +222,26 @@ export default function BiografiaPage() {
           ))}
         </div>
 
-        {/* ================= ACTO 4: PRODUCCIÓN AUDIOVISUAL ================= */}
+{/* ================= ACTO 4: PRODUCCIÓN AUDIOVISUAL ================= */}
         <div className="border-t border-zinc-900 pt-16">
+          
+          {/* Título de Sección Externo (Misma jerarquía que las secciones anteriores) */}
+          <div className="mb-12">
+            <p className="text-xs font-semibold uppercase tracking-[0.5em] text-emerald-400" style={{ textShadow: "0 0 8px rgba(16,185,129,0.5)" }}>
+              // TRAS LAS CÁMARAS
+            </p>
+            <h2 className="mt-4 text-3xl font-black uppercase tracking-wider text-white sm:text-4xl">
+              Producción Audiovisual
+            </h2>
+          </div>
+
+          {/* Contenedor de Nostromo (Ahora solo contiene su información interna) */}
           <div className="flex flex-col items-center justify-between gap-12 rounded-3xl border-2 border-zinc-800 bg-zinc-950 p-8 md:p-12 lg:flex-row lg:gap-20">
             
             <div className="max-w-2xl text-center lg:text-left">
-              <p className="text-xs font-semibold uppercase tracking-[0.5em] text-emerald-400 mb-3" style={{ textShadow: "0 0 8px rgba(16,185,129,0.3)" }}>
-                // TRAS LAS CÁMARAS
-              </p>
-              <h2 className="text-3xl font-black uppercase tracking-wider text-white sm:text-4xl">
+              <h3 className="text-2xl font-bold uppercase tracking-wider text-white">
                 Nostromo Producciones
-              </h2>
+              </h3>
               <p className="mt-4 text-sm leading-relaxed tracking-wide text-zinc-400">
                 La narrativa visual y la atmósfera oscura que define los videoclips de la banda cobran vida bajo la dirección técnica y creativa de Nostromo. Un pilar fundamental para plasmar la densidad dramática de nuestras canciones en piezas cinematográficas memorables.
               </p>
@@ -244,7 +260,7 @@ export default function BiografiaPage() {
 
             {/* Contenedor tipo badge/placa metálica sólida para el logo original */}
             <div className="relative flex h-48 w-48 shrink-0 items-center justify-center overflow-hidden rounded-2xl border-2 border-zinc-800 bg-black p-2 shadow-2xl group">
-              {/* Sutil halo esmeralda que reacciona al hover para dar volumen dinámico */}
+              {/* Sutil halo esmeralda */}
               <div className="absolute inset-0 -z-10 rounded-2xl bg-emerald-500/5 opacity-0 blur-xl transition-opacity duration-500 group-hover:opacity-100" />
               
               <Image

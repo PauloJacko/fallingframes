@@ -37,7 +37,7 @@ export default function Footer() {
         <div className="flex flex-col items-center gap-4 md:items-start">
           <div className="w-[220px] opacity-90">
             <Image
-              src="/images/logo-horizontal.png"
+              src="/images/logo-horizontale.png"
               alt="Falling Frames"
               width={500}
               height={120}
@@ -94,7 +94,16 @@ export default function Footer() {
           <p className="mt-2 text-xs uppercase tracking-[0.3em] text-zinc-700">
             All Rights Reserved
           </p>
+
+          {/* CRÉDITOS: Integración limpia con la estética de terminal de la banda */}
+          <p className="mt-6 text-[10px] font-mono uppercase tracking-[0.2em] text-zinc-500/80">
+            Desarrollado por{" "}
+            <span className="text-zinc-400 font-bold transition-colors duration-300 hover:text-emerald-400">
+              // Paulokko
+            </span>
+          </p>
         </div>
+
       </div>
     </footer>
   );
