@@ -6,8 +6,44 @@ import { CartProvider } from "@/app/context/CartContext";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Falling Frames",
-  description: "Experimental Progressive Metal",
+  title: {
+    default: "Falling Frames // Sitio Oficial",
+    template: "%s | Falling Frames" 
+  },
+  description: "Sitio oficial de Falling Frames. Metal progresivo experimental, atmósferas oscuras, letras oficiales, tienda y material audiovisual.",
+  keywords: [
+    "Falling Frames", 
+    "Metal progresivo", 
+    "Progressive Metal", 
+    "Grito Subterráneo", 
+    "Música experimental", 
+    "Artistas independientes", 
+    "Rock experimental Chile"
+  ],
+  authors: [{ name: "Falling Frames" }],
+  
+  // Control para motores de búsqueda (Google)
+  robots: {
+    index: true,
+    follow: true,
+  },
+
+  openGraph: {
+    title: "Falling Frames // Experimental Progressive Metal",
+    description: "Explora el cancionero interactivo, líricas oficiales y nuestra tienda de merch. Adéntrate en la experiencia industrial de Falling Frames.",
+    url: "https://fallingframes.cl",
+    siteName: "Falling Frames",
+    locale: "es_CL",
+    type: "website",
+    images: [
+      {
+        url: "/og-image.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Falling Frames Oficial Banner",
+      },
+    ],
+  },
 };
 
 export default function RootLayout({
